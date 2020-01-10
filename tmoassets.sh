@@ -31,9 +31,15 @@ let serial=1000000
 
 for BlobName in $(xmllint --xpath "//Blobs/Blob/Name/node()" blobs.xml | sed -e 's/json/json /g')
 do
-    echo ${BlobName}
+    #echo ${BlobName}
     URL="https://tmoassettracker.blob.core.windows.net/tmoassetlog/${BlobName}?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2020-01-16T17:32:20Z&st=2019-11-20T09:32:20Z&spr=https&sig=%2BTVWRZiN7ufX4fUWZfxnuj56sHkDwn1qrRS6fQTWLlw%3D"
-    curl -s $URL > data/${serial}--${BlobName}
+    f=${serial}--${BlobName}
+    curl -s $URL > data/$f
+    timestring=$(jq .Time data/$f | sed -e "s/ /_/g" -e s'/"//g' -e 's:/:-:g' -e 's/:/./g')
+
+    mv data/$f data/${timestring}-$f
+    echo ${timestring}-$f
+
     let serial++
 done
 
