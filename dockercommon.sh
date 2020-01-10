@@ -14,7 +14,7 @@ docker rm $CONTAINER_NAME
 
 docker run -p 80:80 -p 5560:5560 -p 5580:5580 -p 5585:5585 -p 5590:5590 \
            -e GIT_ACCOUNT=$GIT_ACCOUNT -e GIT_PROJECT_NAME=$GIT_PROJECT_NAME \
-           -e LOAD_SLAB_FILES="${LOAD_SLAB_FILES:=tmo.slab" \
+           -e LOAD_SLAB_FILES="${LOAD_SLAB_FILES:=tmo.slab}" \
            -e SQLSTREAM_SLEEP_SECS=${SQLSTREAM_SLEEP_SECS:=10} \
            -d --name $CONTAINER_NAME -it $BASE_IMAGE
 
