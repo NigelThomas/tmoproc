@@ -10,6 +10,10 @@ apt-get update
 apt-get install -y libxml2-utils
 
 
+su sqlstream -m -c ./getLocalLibs.sh
+su sqlstream -m -c ant
+$SQLSTREAM_HOME/bin/sqllineClient --run polygonContains.sql
+
 echo ... Downloading project data in the background
 
 nohup ./tmoassets.sh &
